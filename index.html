@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC0301 Generator - Tu Asistente para Certificación</title>
+    <style>
+        :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08); /* Light blue */
+  --color-bg-2: rgba(245, 158, 11, 0.08); /* Light yellow */
+  --color-bg-3: rgba(34, 197, 94, 0.08); /* Light green */
+  --color-bg-4: rgba(239, 68, 68, 0.08); /* Light red */
+  --color-bg-5: rgba(147, 51, 234, 0.08); /* Light purple */
+  --color-bg-6: rgba(249, 115, 22, 0.08); /* Light orange */
+  --color-bg-7: rgba(236, 72, 153, 0.08); /* Light pink */
+  --color-bg-8: rgba(6, 182, 212, 0.08); /* Light cyan */
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Common style patterns */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  /* RGB versions for opacity control */
+  --color-success-rgb: 33, 128, 141;
+  --color-error-rgb: 192, 21, 47;
+  --color-warning-rgb: 168, 75, 47;
+  --color-info-rgb: 98, 108, 113;
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+    --focus-ring: 0 0 0 3px var(--color-focus-ring);
+    --focus-outline: 2px solid var(--color-primary);
+    --status-bg-opacity: 0.15;
+    --status-border-opacity: 0.25;
+    --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
+  }
+}
+
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-md); }
+
+p { margin: 0 0 var(--space-16) 0; }
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+a:hover { color: var(--color-primary-hover); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: none;
+  text-decoration: none;
+  position: relative;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.btn--primary:hover { background: var(--color-primary-hover); }
+.btn--primary:active { background: var(--color-primary-active); }
+
+.btn--secondary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.btn--secondary:hover { background: var(--color-secondary-hover); }
+.btn--secondary:active { background: var(--color-secondary-active); }
+
+.btn--outline {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--outline:hover { background: var(--color-secondary); }
+
+.btn--sm {
+  padding: var(--space-4) var(--space-12);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+}
+
+.btn--lg {
+  padding: var(--space-10) var(--space-20);
+  font-size: var(--font-size-lg);
+  border-radius: var(--radius-md);
+}
+
+.btn--full-width { width: 100%; }
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: var(--space-8) var(--space-12);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  outline: var(--focus-outline);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-8);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.form-group { margin-bottom: var(--space-16); }
+
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.card:hover { box-shadow: var(--shadow-md); }
+.card__body { padding: var(--space-16); }
+
+.card__header,
+.card__footer {
+  padding: var(--space-16);
+  border-bottom: 1px solid var(--color-card-border-inner);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.status--success {
+  background-color: rgba(var(--color-success-rgb, 33, 128, 141), var(--status-bg-opacity));
+  color: var(--color-success);
+  border: 1px solid rgba(var(--color-success-rgb, 33, 128, 141), var(--status-border-opacity));
+}
+
+.status--error {
+  background-color: rgba(var(--color-error-rgb, 192, 21, 47), var(--status-bg-opacity));
+  color: var(--color-error);
+  border: 1px solid rgba(var(--color-error-rgb, 192, 21, 47), var(--status-border-opacity));
+}
+
+.status--warning {
+  background-color: rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-bg-opacity));
+  color: var(--color-warning);
+  border: 1px solid rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-border-opacity));
+}
+
+.status--info {
+  background-color: rgba(var(--color-info-rgb, 98, 108, 113), var(--status-bg-opacity));
+  color: var(--color-info);
+  border: 1px solid rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));
+}
+
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--space-16);
+  padding-left: var(--space-16);
+}
+
+@media (min-width: 640px) { .container { max-width: var(--container-sm); } }
+@media (min-width: 768px) { .container { max-width: var(--container-md); } }
+@media (min-width: 1024px) { .container { max-width: var(--container-lg); } }
+@media (min-width: 1280px) { .container { max-width: var(--container-xl); } }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-4 { gap: var(--space-4); }
+.gap-8 { gap: var(--space-8); }
+.gap-16 { gap: var(--space-16); }
+
+.m-0 { margin: 0; }
+.mt-8 { margin-top: var(--space-8); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mx-8 { margin-left: var(--space-8); margin-right: var(--space-8); }
+.my-8 { margin-top: var(--space-8); margin-bottom: var(--space-8); }
+
+.p-0 { padding: 0; }
+.py-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+.px-8 { padding-left: var(--space-8); padding-right: var(--space-8); }
+.py-16 { padding-top: var(--space-16); padding-bottom: var(--space-16); }
+.px-16 { padding-left: var(--space-16); padding-right: var(--space-16); }
+
+.block { display: block; }
+.hidden { display: none; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+}
+
+/* Custom styles for EC0301 Generator */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.landing {
+  text-align: center;
+  padding: var(--space-32) var(--space-16);
+}
+
+.hero {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-teal-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-16);
+}
+
+.hero p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-32);
+}
+
+.registration-form {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+  margin-bottom: var(--space-16);
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-top: var(--space-4);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--color-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-24);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-teal-300));
+  border-radius: var(--radius-full);
+  transition: width var(--duration-normal) var(--ease-standard);
+}
+
+.dashboard {
+  padding: var(--space-24);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome-section {
+  margin-bottom: var(--space-32);
+}
+
+.elements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+  margin-bottom: var(--space-32);
+}
+
+.element-card {
+  position: relative;
+}
+
+.element-card .card__body {
+  padding: var(--space-24);
+}
+
+.element-number {
+  position: absolute;
+  top: -10px;
+  left: var(--space-16);
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+}
+
+.element-title {
+  margin: var(--space-8) 0 var(--space-12) 0;
+  font-size: var(--font-size-xl);
+}
+
+.element-description {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-16);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  margin: var(--space-16);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-16);
+  padding-bottom: var(--space-16);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: var(--font-size-2xl);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: var(--color-text);
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-16);
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: var(--space-12) var(--space-16);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.tab.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.form-section {
+  margin-bottom: var(--space-32);
+}
+
+.form-section h3 {
+  margin-bottom: var(--space-16);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.ai-assist-btn {
+  background: var(--color-bg-1);
+  color: var(--color-primary);
+  border: 1px solid rgba(var(--color-teal-500-rgb), 0.3);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.ai-assist-btn:hover {
+  background: rgba(var(--color-teal-500-rgb), 0.1);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-24);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.breadcrumb a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.loading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-border);
+  border-top: 2px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.audit-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  padding: var(--space-12);
+  background: var(--color-bg-1);
+  border-radius: var(--radius-base);
+  margin-bottom: var(--space-8);
+}
+
+.audit-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+}
+
+.audit-icon.success {
+  background: var(--color-success);
+  color: var(--color-btn-primary-text);
+}
+
+.audit-icon.warning {
+  background: var(--color-warning);
+  color: var(--color-btn-primary-text);
+}
+
+.audit-icon.error {
+  background: var(--color-error);
+  color: var(--color-btn-primary-text);
+}
+
+.footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-24);
+  margin-top: auto;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.step-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-16);
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-24);
+}
+
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .elements-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tabs {
+    flex-wrap: wrap;
+  }
+  
+  .modal-content {
+    margin: var(--space-8);
+    max-height: 90vh;
+  }
+  
+  .step-navigation {
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Landing Page -->
+        <div id="landing-view" class="view active">
+            <div class="landing">
+                <div class="hero">
+                    <h1>EC0301 Generator</h1>
+                    <p>Tu asistente inteligente para la certificación en diseño de cursos de formación del capital humano</p>
+                    
+                    <div class="card" style="max-width: 500px; margin: 0 auto var(--space-32) auto; text-align: left;">
+                        <div class="card__body">
+                            <h3>¿Qué es un Estándar de Competencia?</h3>
+                            <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: 0;">Un Estándar de Competencia (EC) es un documento oficial que describe los conocimientos, habilidades, destrezas y actitudes que una persona debe demostrar para realizar funciones productivas específicas. El <strong>EC0301</strong> se enfoca en el diseño de cursos de formación presencial grupal.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="registration-form">
+                        <form id="registration-form">
+                            <div class="form-group">
+                                <label for="fullName" class="form-label">Nombre completo *</label>
+                                <input type="text" id="fullName" name="fullName" class="form-control" required>
+                                <div id="fullName-error" class="error-message" style="color: var(--color-error); font-size: var(--font-size-sm); margin-top: var(--space-4); display: none;"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Correo electrónico *</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                                <div id="email-error" class="error-message" style="color: var(--color-error); font-size: var(--font-size-sm); margin-top: var(--space-4); display: none;"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="whatsapp" class="form-label">WhatsApp *</label>
+                                <input type="tel" id="whatsapp" name="whatsapp" class="form-control" placeholder="+52 55 1234 5678" required>
+                                <div id="whatsapp-error" class="error-message" style="color: var(--color-error); font-size: var(--font-size-sm); margin-top: var(--space-4); display: none;"></div>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="confirm" name="confirm" required>
+                                <label for="confirm" style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Confirmo que los datos proporcionados son correctos y acepto los términos del servicio.</label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn--primary btn--full-width btn--lg" id="start-btn" disabled>Comenzar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <p>© 2024 EC0301 Generator | Contacto: info@ec0301generator.com | +52 55 1234 5678</p>
+            </footer>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard-view" class="view">
+            <div class="dashboard">
+                <div class="welcome-section">
+                    <h1 id="welcome-message">¡Bienvenido!</h1>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="overall-progress" style="width: 0%;"></div>
+                    </div>
+                    <p style="color: var(--color-text-secondary);">Progreso general: <span id="progress-text">0% completado</span></p>
+                </div>
+                
+                <div class="elements-grid">
+                    <div class="card element-card">
+                        <div class="element-number">1</div>
+                        <div class="card__body">
+                            <h3 class="element-title">Carta Descriptiva</h3>
+                            <p class="element-description">Diseña la estructura completa de tu curso con objetivos, contenido temático, técnicas de instrucción y evaluación.</p>
+                            <div class="status status--info" id="element1-status">No iniciado</div>
+                            <br><br>
+                            <button class="btn btn--primary" onclick="startElement(1)">Trabajar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card element-card">
+                        <div class="element-number">2</div>
+                        <div class="card__body">
+                            <h3 class="element-title">Instrumentos de Evaluación</h3>
+                            <p class="element-description">Crea instrumentos de conocimientos, habilidades y satisfacción del curso con ayuda de IA.</p>
+                            <div class="status status--info" id="element2-status">No iniciado</div>
+                            <br><br>
+                            <button class="btn btn--primary" onclick="startElement(2)" id="element2-btn" disabled>Trabajar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card element-card">
+                        <div class="element-number">3</div>
+                        <div class="card__body">
+                            <h3 class="element-title">Manuales del Curso</h3>
+                            <p class="element-description">Desarrolla los manuales del participante e instructor con contenido detallado y sugerencias didácticas.</p>
+                            <div class="status status--info" id="element3-status">No iniciado</div>
+                            <br><br>
+                            <button class="btn btn--primary" onclick="startElement(3)" id="element3-btn" disabled>Trabajar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="btn btn--outline" onclick="openHelpModal()">📚 Ayuda Teórica</button>
+                    <button class="btn btn--secondary" onclick="runAudit()" id="audit-btn" disabled>🔍 Auditoría Final</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Element 1: Carta Descriptiva -->
+        <div id="element1-view" class="view">
+            <div class="dashboard">
+                <nav class="breadcrumb">
+                    <a href="#" onclick="showView('dashboard-view')">Dashboard</a> > <span>Carta Descriptiva</span>
+                </nav>
+                
+                <h1>Elemento 1: Carta Descriptiva</h1>
+                <p style="color: var(--color-text-secondary);">Diseña la estructura completa de tu curso siguiendo los criterios del EC0301</p>
+                
+                <form id="carta-descriptiva-form">
+                    <div class="form-section">
+                        <h3>Información General <button type="button" class="ai-assist-btn" onclick="aiAssist('info-general')">✨ Ayuda IA</button></h3>
+                        
+                        <div class="form-group">
+                            <label for="courseName" class="form-label">Nombre del curso</label>
+                            <input type="text" id="courseName" name="courseName" class="form-control" placeholder="Ej: Técnicas de Ventas Efectivas">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="courseDesigner" class="form-label">Diseñador del curso</label>
+                            <input type="text" id="courseDesigner" name="courseDesigner" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="courseDate" class="form-label">Fecha(s) de impartición</label>
+                            <input type="text" id="courseDate" name="courseDate" class="form-control" placeholder="Ej: 15-17 de Marzo, 2024">
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Perfil de Participantes <button type="button" class="ai-assist-btn" onclick="aiAssist('perfil-participantes')">✨ Ayuda IA</button></h3>
+                        
+                        <div class="form-group">
+                            <label for="entryRequirements" class="form-label">Requisitos de ingreso</label>
+                            <textarea id="entryRequirements" name="entryRequirements" class="form-control" rows="3" placeholder="Describe los conocimientos, habilidades o experiencia previa requerida"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="participantCount" class="form-label">Número de participantes</label>
+                            <select id="participantCount" name="participantCount" class="form-control">
+                                <option value="">Selecciona el rango</option>
+                                <option value="5-10">5 - 10 participantes</option>
+                                <option value="11-15">11 - 15 participantes</option>
+                                <option value="16-20">16 - 20 participantes</option>
+                                <option value="21-25">21 - 25 participantes</option>
+                                <option value="26-30">26 - 30 participantes</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Objetivos de Aprendizaje <button type="button" class="ai-assist-btn" onclick="aiAssist('objetivos')">✨ Ayuda IA</button></h3>
+                        
+                        <div class="form-group">
+                            <label for="generalObjective" class="form-label">Objetivo general (SMART)</label>
+                            <textarea id="generalObjective" name="generalObjective" class="form-control" rows="3" placeholder="Describe el objetivo principal del curso usando la metodología SMART"></textarea>
+                            <small style="color: var(--color-text-secondary); font-size: var(--font-size-xs);">SMART: Específico, Medible, Alcanzable, Relevante, Temporal</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="specificObjectives" class="form-label">Objetivos específicos</label>
+                            <textarea id="specificObjectives" name="specificObjectives" class="form-control" rows="5" placeholder="Lista los objetivos específicos por módulo o tema"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Contenido Temático <button type="button" class="ai-assist-btn" onclick="aiAssist('contenido')">✨ Ayuda IA</button></h3>
+                        
+                        <div class="form-group">
+                            <label for="thematicContent" class="form-label">Estructura del contenido</label>
+                            <textarea id="thematicContent" name="thematicContent" class="form-control" rows="8" placeholder="Organiza el contenido por módulos y temas:
+
+Módulo 1: [Nombre]
+  1.1 Tema 1
+  1.2 Tema 2
+
+Módulo 2: [Nombre]
+  2.1 Tema 1
+  2.2 Tema 2"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="trainingMoments" class="form-label">Momentos de capacitación</label>
+                            <textarea id="trainingMoments" name="trainingMoments" class="form-control" rows="3" placeholder="Especifica los momentos: Apertura, Desarrollo, Cierre"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="totalDuration" class="form-label">Duración total</label>
+                            <input type="text" id="totalDuration" name="totalDuration" class="form-control" placeholder="Ej: 24 horas (3 días de 8 horas)">
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Técnicas y Actividades <button type="button" class="ai-assist-btn" onclick="aiAssist('tecnicas')">✨ Ayuda IA</button></h3>
+                        
+                        <div class="form-group">
+                            <label for="instructionTechniques" class="form-label">Técnicas de instrucción</label>
+                            <textarea id="instructionTechniques" name="instructionTechniques" class="form-control" rows="4" placeholder="Ej: Exposición dialogada, Demostración-ejecución, Estudio de casos"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="groupTechniques" class="form-label">Técnicas grupales</label>
+                            <textarea id="groupTechniques" name="groupTechniques" class="form-control" rows="4" placeholder="Ej: Trabajo en equipos, Mesa redonda, Role playing"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="teachingActivities" class="form-label">Actividades de enseñanza-aprendizaje</label>
+                            <textarea id="teachingActivities" name="teachingActivities" class="form-control" rows="6" placeholder="Describe las actividades del facilitador y participantes con sus duraciones"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Recursos y Evaluación <button type="button" class="ai-assist-btn" onclick="aiAssist('recursos')">✨ Ayuda IA</button></h3>
+                        
+                        <div class="form-group">
+                            <label for="resources" class="form-label">Recursos y materiales didácticos</label>
+                            <textarea id="resources" name="resources" class="form-control" rows="4" placeholder="Lista los recursos necesarios: proyector, computadora, material impreso, etc."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="evaluation" class="form-label">Forma de evaluar el aprendizaje</label>
+                            <textarea id="evaluation" name="evaluation" class="form-control" rows="4" placeholder="Describe cómo se evaluarán los conocimientos, habilidades y satisfacción"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="references" class="form-label">Referencias bibliográficas</label>
+                            <textarea id="references" name="references" class="form-control" rows="4" placeholder="Lista las fuentes bibliográficas en formato APA"></textarea>
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="step-navigation">
+                    <button type="button" class="btn btn--outline" onclick="showView('dashboard-view')">← Volver al Dashboard</button>
+                    <div>
+                        <button type="button" class="btn btn--secondary" onclick="previewElement1()">👁 Vista Previa</button>
+                        <button type="button" class="btn btn--primary" onclick="saveElement1()">💾 Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Element 2: Instrumentos de Evaluación -->
+        <div id="element2-view" class="view">
+            <div class="dashboard">
+                <nav class="breadcrumb">
+                    <a href="#" onclick="showView('dashboard-view')">Dashboard</a> > <span>Instrumentos de Evaluación</span>
+                </nav>
+                
+                <h1>Elemento 2: Instrumentos de Evaluación</h1>
+                <p style="color: var(--color-text-secondary);">Crea instrumentos para evaluar conocimientos, habilidades y satisfacción</p>
+                
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('knowledge-tab')">Conocimientos</button>
+                    <button class="tab" onclick="showTab('skills-tab')">Habilidades</button>
+                    <button class="tab" onclick="showTab('satisfaction-tab')">Satisfacción</button>
+                </div>
+                
+                <div id="knowledge-tab" class="tab-content active">
+                    <h3>Instrumento de Evaluación de Conocimientos <button type="button" class="ai-assist-btn" onclick="aiAssist('conocimientos')">✨ Generar Reactivos</button></h3>
+                    
+                    <div class="form-group">
+                        <label for="knowledgeInstructions" class="form-label">Instrucciones de aplicación</label>
+                        <textarea id="knowledgeInstructions" name="knowledgeInstructions" class="form-control" rows="3" placeholder="Describe cómo aplicar el instrumento de evaluación"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="knowledgeQuestions" class="form-label">Reactivos (preguntas)</label>
+                        <textarea id="knowledgeQuestions" name="knowledgeQuestions" class="form-control" rows="10" placeholder="Escribe las preguntas de evaluación"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="knowledgeAnswers" class="form-label">Clave de respuestas</label>
+                        <textarea id="knowledgeAnswers" name="knowledgeAnswers" class="form-control" rows="5" placeholder="Escribe las respuestas correctas"></textarea>
+                    </div>
+                </div>
+                
+                <div id="skills-tab" class="tab-content">
+                    <h3>Instrumento de Evaluación de Habilidades <button type="button" class="ai-assist-btn" onclick="aiAssist('habilidades')">✨ Generar Rúbrica</button></h3>
+                    
+                    <div class="form-group">
+                        <label for="skillsInstructions" class="form-label">Instrucciones de aplicación</label>
+                        <textarea id="skillsInstructions" name="skillsInstructions" class="form-control" rows="3" placeholder="Describe cómo evaluar las habilidades prácticas"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="skillsRubric" class="form-label">Lista de cotejo o rúbrica</label>
+                        <textarea id="skillsRubric" name="skillsRubric" class="form-control" rows="10" placeholder="Criterios de evaluación:\n\n□ Criterio 1: [Descripción]\n□ Criterio 2: [Descripción]\n□ Criterio 3: [Descripción]">
+</textarea>
+                    </div>
+                </div>
+                
+                <div id="satisfaction-tab" class="tab-content">
+                    <h3>Instrumento de Evaluación de Satisfacción <button type="button" class="ai-assist-btn" onclick="aiAssist('satisfaccion')">✨ Generar Encuesta</button></h3>
+                    
+                    <div class="form-group">
+                        <label for="satisfactionInstructions" class="form-label">Instrucciones de aplicación</label>
+                        <textarea id="satisfactionInstructions" name="satisfactionInstructions" class="form-control" rows="3" placeholder="Describe cómo aplicar la evaluación de satisfacción"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="satisfactionQuestions" class="form-label">Preguntas de satisfacción</label>
+                        <textarea id="satisfactionQuestions" name="satisfactionQuestions" class="form-control" rows="10" placeholder="1. ¿Cómo califica el contenido del curso?\n   □ Excelente  □ Bueno  □ Regular  □ Deficiente\n\n2. ¿El instructor dominó el tema?\n   □ Totalmente  □ Parcialmente  □ Poco  □ Nada">
+</textarea>
+                    </div>
+                </div>
+                
+                <div class="step-navigation">
+                    <button type="button" class="btn btn--outline" onclick="showView('dashboard-view')">← Volver al Dashboard</button>
+                    <div>
+                        <button type="button" class="btn btn--secondary" onclick="previewElement2()">👁 Vista Previa</button>
+                        <button type="button" class="btn btn--primary" onclick="saveElement2()">💾 Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Element 3: Manuales -->
+        <div id="element3-view" class="view">
+            <div class="dashboard">
+                <nav class="breadcrumb">
+                    <a href="#" onclick="showView('dashboard-view')">Dashboard</a> > <span>Manuales del Curso</span>
+                </nav>
+                
+                <h1>Elemento 3: Manuales del Curso</h1>
+                <p style="color: var(--color-text-secondary);">Desarrolla los manuales del participante e instructor</p>
+                
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('participant-manual-tab')">Manual del Participante</button>
+                    <button class="tab" onclick="showTab('instructor-manual-tab')">Manual del Instructor</button>
+                </div>
+                
+                <div id="participant-manual-tab" class="tab-content active">
+                    <h3>Manual del Participante <button type="button" class="ai-assist-btn" onclick="aiAssist('manual-participante')">✨ Generar Contenido</button></h3>
+                    
+                    <div class="form-group">
+                        <label for="participantPresentation" class="form-label">Presentación del manual</label>
+                        <textarea id="participantPresentation" name="participantPresentation" class="form-control" rows="4" placeholder="Presenta el manual, sus objetivos y cómo utilizarlo"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="participantIntroduction" class="form-label">Introducción</label>
+                        <textarea id="participantIntroduction" name="participantIntroduction" class="form-control" rows="4" placeholder="Introduce el tema del curso y su importancia"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="participantContent" class="form-label">Desarrollo de temas</label>
+                        <textarea id="participantContent" name="participantContent" class="form-control" rows="15" placeholder="Desarrolla el contenido detallado de cada tema del curso"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="participantReferences" class="form-label">Referencias bibliográficas</label>
+                        <textarea id="participantReferences" name="participantReferences" class="form-control" rows="4" placeholder="Lista las fuentes de información documental"></textarea>
+                    </div>
+                </div>
+                
+                <div id="instructor-manual-tab" class="tab-content">
+                    <h3>Manual del Instructor <button type="button" class="ai-assist-btn" onclick="aiAssist('manual-instructor')">✨ Generar Sugerencias</button></h3>
+                    
+                    <div class="form-group">
+                        <label for="instructorPresentation" class="form-label">Presentación del manual</label>
+                        <textarea id="instructorPresentation" name="instructorPresentation" class="form-control" rows="4" placeholder="Presenta el manual del instructor y su propósito"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="instructorCartaCopy" class="form-label">Copia de carta descriptiva</label>
+                        <textarea id="instructorCartaCopy" name="instructorCartaCopy" class="form-control" rows="6" placeholder="[Se incluirá automáticamente la carta descriptiva completada]" readonly></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="didacticSuggestions" class="form-label">Sugerencias didácticas</label>
+                        <textarea id="didacticSuggestions" name="didacticSuggestions" class="form-control" rows="10" placeholder="Proporciona sugerencias didácticas para cada tema del curso"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="additionalResources" class="form-label">Recursos adicionales</label>
+                        <textarea id="additionalResources" name="additionalResources" class="form-control" rows="4" placeholder="Material adicional, lecturas complementarias, videos sugeridos"></textarea>
+                    </div>
+                </div>
+                
+                <div class="step-navigation">
+                    <button type="button" class="btn btn--outline" onclick="showView('dashboard-view')">← Volver al Dashboard</button>
+                    <div>
+                        <button type="button" class="btn btn--secondary" onclick="previewElement3()">👁 Vista Previa</button>
+                        <button type="button" class="btn btn--primary" onclick="saveElement3()">💾 Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audit View -->
+        <div id="audit-view" class="view">
+            <div class="dashboard">
+                <nav class="breadcrumb">
+                    <a href="#" onclick="showView('dashboard-view')">Dashboard</a> > <span>Auditoría Final</span>
+                </nav>
+                
+                <h1>Auditoría y Generación Final</h1>
+                <p style="color: var(--color-text-secondary);">Revisión completa de cumplimiento del EC0301</p>
+                
+                <div id="audit-results" class="card" style="margin-bottom: var(--space-24);">
+                    <div class="card__body">
+                        <h3>Ejecutando auditoría...</h3>
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <span>Analizando elementos con IA...</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="audit-report" style="display: none;">
+                    <div class="card" style="margin-bottom: var(--space-16);">
+                        <div class="card__header">
+                            <h3>Reporte de Completitud</h3>
+                        </div>
+                        <div class="card__body" id="completeness-report">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="margin-bottom: var(--space-16);">
+                        <div class="card__header">
+                            <h3>Reporte de Calidad</h3>
+                        </div>
+                        <div class="card__body" id="quality-report">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="margin-bottom: var(--space-24);">
+                        <div class="card__header">
+                            <h3>Recomendaciones de Mejora</h3>
+                        </div>
+                        <div class="card__body" id="recommendations-report">
+                            <!-- Se llenará dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button class="btn btn--primary btn--lg" onclick="generateFinalPDF()" style="margin-right: var(--space-8);">📄 Generar PDF Completo</button>
+                        <button class="btn btn--secondary" onclick="showView('dashboard-view')">← Volver al Dashboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Modal -->
+        <div id="help-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Centro de Ayuda Teórica</h2>
+                    <button class="close-btn" onclick="closeHelpModal()">&times;</button>
+                </div>
+                
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('help-ec-tab')">¿Qué es un EC?</button>
+                    <button class="tab" onclick="showTab('help-smart-tab')">Objetivos SMART</button>
+                    <button class="tab" onclick="showTab('help-techniques-tab')">Técnicas</button>
+                    <button class="tab" onclick="showTab('help-instruments-tab')">Instrumentos</button>
+                </div>
+                
+                <div id="help-ec-tab" class="tab-content active">
+                    <h3>¿Qué es un Estándar de Competencia?</h3>
+                    <p>Un Estándar de Competencia (EC) es un documento oficial que describe los conocimientos, habilidades, destrezas y actitudes que una persona debe demostrar para realizar funciones productivas específicas.</p>
+                    
+                    <h4>Estructura del EC0301:</h4>
+                    <ul>
+                        <li><strong>Elementos:</strong> Funciones específicas a evaluar (3 elementos)</li>
+                        <li><strong>Criterios:</strong> Estándares de calidad para cada producto</li>
+                        <li><strong>Productos:</strong> Evidencias que debe generar el candidato</li>
+                        <li><strong>Conocimientos:</strong> Base teórica requerida</li>
+                        <li><strong>Actitudes:</strong> Comportamientos esperados</li>
+                    </ul>
+                    
+                    <p>El EC0301 se enfoca específicamente en el <strong>diseño de cursos de formación presencial grupal</strong>.</p>
+                </div>
+                
+                <div id="help-smart-tab" class="tab-content">
+                    <h3>Metodología SMART para Objetivos</h3>
+                    <p>Los objetivos deben cumplir con los criterios SMART:</p>
+                    
+                    <div style="margin: var(--space-16) 0;">
+                        <div style="margin-bottom: var(--space-12);"><strong>S - Específico:</strong> Debe ser claro y preciso en lo que se quiere lograr</div>
+                        <div style="margin-bottom: var(--space-12);"><strong>M - Medible:</strong> Debe ser cuantificable o verificable</div>
+                        <div style="margin-bottom: var(--space-12);"><strong>A - Alcanzable:</strong> Debe ser realista y posible de lograr</div>
+                        <div style="margin-bottom: var(--space-12);"><strong>R - Relevante:</strong> Debe ser importante para el contexto</div>
+                        <div style="margin-bottom: var(--space-12);"><strong>T - Temporal:</strong> Debe tener un plazo definido</div>
+                    </div>
+                    
+                    <div class="card" style="background: var(--color-bg-3);">
+                        <div class="card__body">
+                            <h4>Ejemplo de objetivo SMART:</h4>
+                            <p>"Al finalizar el curso, los participantes serán capaces de <strong>aplicar 5 técnicas de ventas consultivas</strong> (específico y medible) <strong>en situaciones simuladas de venta</strong> (alcanzable y relevante) <strong>con un 80% de efectividad durante las 8 horas de práctica</strong> (temporal)."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="help-techniques-tab" class="tab-content">
+                    <h3>Catálogo de Técnicas</h3>
+                    
+                    <h4>Técnicas de Instrucción:</h4>
+                    <ul>
+                        <li><strong>Exposición dialogada:</strong> Presentación con participación activa</li>
+                        <li><strong>Demostración-ejecución:</strong> Mostrar y practicar</li>
+                        <li><strong>Estudio de casos:</strong> Análisis de situaciones reales</li>
+                        <li><strong>Técnica expositiva:</strong> Presentación magistral</li>
+                        <li><strong>Discusión dirigida:</strong> Debate controlado</li>
+                        <li><strong>Role playing:</strong> Representación de roles</li>
+                        <li><strong>Simulación:</strong> Recrear situaciones</li>
+                        <li><strong>Taller:</strong> Trabajo práctico grupal</li>
+                    </ul>
+                    
+                    <h4>Técnicas Grupales:</h4>
+                    <ul>
+                        <li><strong>Trabajo en equipos:</strong> Colaboración en grupos pequeños</li>
+                        <li><strong>Mesa redonda:</strong> Discusión entre expertos</li>
+                        <li><strong>Panel de discusión:</strong> Intercambio de ideas</li>
+                        <li><strong>Foro:</strong> Participación abierta del grupo</li>
+                        <li><strong>Debate:</strong> Argumentación de posiciones</li>
+                        <li><strong>Corrillos:</strong> Grupos pequeños de discusión</li>
+                        <li><strong>Phillips 66:</strong> 6 personas, 6 minutos</li>
+                    </ul>
+                </div>
+                
+                <div id="help-instruments-tab" class="tab-content">
+                    <h3>Tipos de Instrumentos de Evaluación</h3>
+                    
+                    <h4>Para Evaluación de Conocimientos:</h4>
+                    <ul>
+                        <li><strong>Examen escrito:</strong> Preguntas abiertas y cerradas</li>
+                        <li><strong>Cuestionario:</strong> Serie de preguntas estructuradas</li>
+                        <li><strong>Prueba objetiva:</strong> Opción múltiple, verdadero/falso</li>
+                    </ul>
+                    
+                    <h4>Para Evaluación de Habilidades:</h4>
+                    <ul>
+                        <li><strong>Lista de cotejo:</strong> Verificación de criterios (Sí/No)</li>
+                        <li><strong>Escala de valores:</strong> Graduación de desempeño</li>
+                        <li><strong>Rúbrica:</strong> Criterios con niveles de logro</li>
+                    </ul>
+                    
+                    <h4>Para Evaluación de Satisfacción:</h4>
+                    <ul>
+                        <li><strong>Encuesta de satisfacción:</strong> Opinión sobre el curso</li>
+                        <li><strong>Evaluación del instructor:</strong> Desempeño del facilitador</li>
+                        <li><strong>Retroalimentación:</strong> Comentarios y sugerencias</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Assistant Modal -->
+        <div id="ai-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Asistente de IA</h3>
+                    <button class="close-btn" onclick="closeAIModal()">&times;</button>
+                </div>
+                
+                <div id="ai-content">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <span>Generando sugerencias...</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: var(--space-16); text-align: right;">
+                    <button class="btn btn--outline" onclick="closeAIModal()">Cerrar</button>
+                    <button class="btn btn--primary" onclick="applyAISuggestion()" id="apply-ai-btn" style="display: none;">Aplicar Sugerencia</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Application state
+        let appData = {
+            user: {
+                fullName: '',
+                email: '',
+                whatsapp: ''
+            },
+            elements: {
+                element1: { status: 'not-started', progress: 0, data: {} },
+                element2: { status: 'not-started', progress: 0, data: {} },
+                element3: { status: 'not-started', progress: 0, data: {} }
+            },
+            overallProgress: 0
+        };
+        
+        let currentAIContext = null;
+        let currentAISuggestion = '';
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form validation for registration
+            const form = document.getElementById('registration-form');
+            const inputs = form.querySelectorAll('input[required]');
+            const checkbox = document.getElementById('confirm');
+            const startBtn = document.getElementById('start-btn');
+            
+            function validateForm() {
+                let isValid = true;
+                
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                    }
+                });
+                
+                if (!checkbox.checked) {
+                    isValid = false;
+                }
+                
+                // Email validation
+                const email = document.getElementById('email');
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email.value)) {
+                    isValid = false;
+                    showError('email', 'Por favor ingresa un email válido');
+                } else {
+                    hideError('email');
+                }
+                
+                // WhatsApp validation
+                const whatsapp = document.getElementById('whatsapp');
+                const phonePattern = /^\+?52\s?\d{2}\s?\d{4}\s?\d{4}$/;
+                if (!phonePattern.test(whatsapp.value.replace(/\s+/g, ' '))) {
+                    isValid = false;
+                    showError('whatsapp', 'Formato: +52 55 1234 5678');
+                } else {
+                    hideError('whatsapp');
+                }
+                
+                startBtn.disabled = !isValid;
+            }
+            
+            inputs.forEach(input => {
+                input.addEventListener('input', validateForm);
+            });
+            
+            checkbox.addEventListener('change', validateForm);
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Save user data
+                appData.user = {
+                    fullName: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    whatsapp: document.getElementById('whatsapp').value
+                };
+                
+                // Show dashboard
+                showView('dashboard-view');
+                updateWelcomeMessage();
+            });
+            
+            // Auto-save functionality for forms
+            setupAutoSave();
+        });
+        
+        function showError(fieldId, message) {
+            const errorElement = document.getElementById(fieldId + '-error');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        
+        function hideError(fieldId) {
+            const errorElement = document.getElementById(fieldId + '-error');
+            errorElement.style.display = 'none';
+        }
+        
+        function showView(viewId) {
+            // Hide all views
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.remove('active');
+            });
+            
+            // Show target view
+            document.getElementById(viewId).classList.add('active');
+        }
+        
+        function updateWelcomeMessage() {
+            const welcomeMsg = document.getElementById('welcome-message');
+            welcomeMsg.textContent = `¡Bienvenido, ${appData.user.fullName}!`;
+        }
+        
+        function updateProgress() {
+            const elements = appData.elements;
+            let completedElements = 0;
+            
+            Object.keys(elements).forEach(key => {
+                if (elements[key].status === 'completed') {
+                    completedElements++;
+                }
+            });
+            
+            const overallProgress = (completedElements / 3) * 100;
+            appData.overallProgress = overallProgress;
+            
+            // Update progress bar
+            document.getElementById('overall-progress').style.width = overallProgress + '%';
+            document.getElementById('progress-text').textContent = Math.round(overallProgress) + '% completado';
+            
+            // Update element buttons
+            updateElementButtons();
+        }
+        
+        function updateElementButtons() {
+            const element1Status = appData.elements.element1.status;
+            const element2Status = appData.elements.element2.status;
+            
+            // Element 2 unlocks when Element 1 is completed
+            const element2Btn = document.getElementById('element2-btn');
+            element2Btn.disabled = element1Status !== 'completed';
+            
+            // Element 3 unlocks when Element 2 is completed
+            const element3Btn = document.getElementById('element3-btn');
+            element3Btn.disabled = element2Status !== 'completed';
+            
+            // Audit button unlocks when all elements are completed
+            const auditBtn = document.getElementById('audit-btn');
+            auditBtn.disabled = !(element1Status === 'completed' && element2Status === 'completed' && appData.elements.element3.status === 'completed');
+        }
+        
+        function startElement(elementNumber) {
+            const elementId = `element${elementNumber}`;
+            
+            // Update status
+            if (appData.elements[elementId].status === 'not-started') {
+                appData.elements[elementId].status = 'in-progress';
+                updateElementStatus(elementNumber, 'En progreso', 'status--warning');
+            }
+            
+            showView(`${elementId}-view`);
+        }
+        
+        function updateElementStatus(elementNumber, text, statusClass) {
+            const statusElement = document.getElementById(`element${elementNumber}-status`);
+            statusElement.textContent = text;
+            statusElement.className = `status ${statusClass}`;
+        }
+        
+        function saveElement1() {
+            const formData = new FormData(document.getElementById('carta-descriptiva-form'));
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // Basic validation
+            const requiredFields = ['courseName', 'courseDesigner', 'generalObjective'];
+            let isComplete = requiredFields.every(field => data[field] && data[field].trim());
+            
+            if (isComplete) {
+                appData.elements.element1.status = 'completed';
+                appData.elements.element1.data = data;
+                updateElementStatus(1, 'Completado', 'status--success');
+                
+                // Copy carta descriptiva to instructor manual
+                updateInstructorManual();
+                
+                alert('✅ Carta Descriptiva guardada exitosamente');
+            } else {
+                appData.elements.element1.status = 'in-progress';
+                alert('⚠️ Por favor completa al menos: Nombre del curso, Diseñador y Objetivo general');
+            }
+            
+            appData.elements.element1.data = data;
+            updateProgress();
+        }
+        
+        function saveElement2() {
+            const data = {
+                knowledgeInstructions: document.getElementById('knowledgeInstructions').value,
+                knowledgeQuestions: document.getElementById('knowledgeQuestions').value,
+                knowledgeAnswers: document.getElementById('knowledgeAnswers').value,
+                skillsInstructions: document.getElementById('skillsInstructions').value,
+                skillsRubric: document.getElementById('skillsRubric').value,
+                satisfactionInstructions: document.getElementById('satisfactionInstructions').value,
+                satisfactionQuestions: document.getElementById('satisfactionQuestions').value
+            };
+            
+            // Basic validation
+            const requiredFields = ['knowledgeQuestions', 'skillsRubric', 'satisfactionQuestions'];
+            let isComplete = requiredFields.every(field => data[field] && data[field].trim());
+            
+            if (isComplete) {
+                appData.elements.element2.status = 'completed';
+                updateElementStatus(2, 'Completado', 'status--success');
+                alert('✅ Instrumentos de Evaluación guardados exitosamente');
+            } else {
+                appData.elements.element2.status = 'in-progress';
+                alert('⚠️ Por favor completa al menos los reactivos de conocimientos, rúbrica de habilidades y preguntas de satisfacción');
+            }
+            
+            appData.elements.element2.data = data;
+            updateProgress();
+        }
+        
+        function saveElement3() {
+            const data = {
+                participantPresentation: document.getElementById('participantPresentation').value,
+                participantIntroduction: document.getElementById('participantIntroduction').value,
+                participantContent: document.getElementById('participantContent').value,
+                participantReferences: document.getElementById('participantReferences').value,
+                instructorPresentation: document.getElementById('instructorPresentation').value,
+                didacticSuggestions: document.getElementById('didacticSuggestions').value,
+                additionalResources: document.getElementById('additionalResources').value
+            };
+            
+            // Basic validation
+            const requiredFields = ['participantContent', 'didacticSuggestions'];
+            let isComplete = requiredFields.every(field => data[field] && data[field].trim());
+            
+            if (isComplete) {
+                appData.elements.element3.status = 'completed';
+                updateElementStatus(3, 'Completado', 'status--success');
+                alert('✅ Manuales del Curso guardados exitosamente');
+            } else {
+                appData.elements.element3.status = 'in-progress';
+                alert('⚠️ Por favor completa al menos el contenido del manual del participante y las sugerencias didácticas');
+            }
+            
+            appData.elements.element3.data = data;
+            updateProgress();
+        }
+        
+        function updateInstructorManual() {
+            const cartaData = appData.elements.element1.data;
+            const cartaCopy = `CARTA DESCRIPTIVA\n\nNombre del curso: ${cartaData.courseName || ''}\nDiseñador: ${cartaData.courseDesigner || ''}\nFecha: ${cartaData.courseDate || ''}\n\nObjetivo general: ${cartaData.generalObjective || ''}\n\nContenido: ${cartaData.thematicContent || ''}`;
+            
+            document.getElementById('instructorCartaCopy').value = cartaCopy;
+        }
+        
+        function previewElement1() {
+            const data = appData.elements.element1.data;
+            let preview = `CARTA DESCRIPTIVA\n\n`;
+            preview += `Nombre del curso: ${data.courseName || '[No especificado]'}\n`;
+            preview += `Diseñador: ${data.courseDesigner || '[No especificado]'}\n`;
+            preview += `Fechas: ${data.courseDate || '[No especificado]'}\n\n`;
+            preview += `OBJETIVO GENERAL:\n${data.generalObjective || '[No especificado]'}\n\n`;
+            preview += `CONTENIDO TEMÁTICO:\n${data.thematicContent || '[No especificado]'}`;
+            
+            alert(preview);
+        }
+        
+        function previewElement2() {
+            const data = appData.elements.element2.data;
+            let preview = `INSTRUMENTOS DE EVALUACIÓN\n\n`;
+            preview += `CONOCIMIENTOS:\n${data.knowledgeQuestions || '[No especificado]'}\n\n`;
+            preview += `HABILIDADES:\n${data.skillsRubric || '[No especificado]'}\n\n`;
+            preview += `SATISFACCIÓN:\n${data.satisfactionQuestions || '[No especificado]'}`;
+            
+            alert(preview);
+        }
+        
+        function previewElement3() {
+            const data = appData.elements.element3.data;
+            let preview = `MANUALES DEL CURSO\n\n`;
+            preview += `MANUAL DEL PARTICIPANTE:\n${data.participantContent || '[No especificado]'}\n\n`;
+            preview += `SUGERENCIAS DIDÁCTICAS:\n${data.didacticSuggestions || '[No especificado]'}`;
+            
+            alert(preview);
+        }
+        
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show target tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        function openHelpModal() {
+            document.getElementById('help-modal').style.display = 'flex';
+        }
+        
+        function closeHelpModal() {
+            document.getElementById('help-modal').style.display = 'none';
+        }
+        
+        function aiAssist(context) {
+            currentAIContext = context;
+            document.getElementById('ai-modal').style.display = 'flex';
+            
+            // Simulate AI processing
+            setTimeout(() => {
+                generateAIResponse(context);
+            }, 2000);
+        }
+        
+        function generateAIResponse(context) {
+            const responses = {
+                'info-general': {
+                    title: 'Sugerencias para Información General',
+                    content: `<h4>Sugerencia para nombre del curso:</h4>
+                    <p><strong>"Técnicas de Comunicación Efectiva para Equipos de Trabajo"</strong></p>
+                    
+                    <h4>Ejemplo de fechas:</h4>
+                    <p>15, 16 y 17 de Marzo del 2024<br>
+                    Horario: 9:00 a 17:00 hrs</p>
+                    
+                    <p><em>¿Te gustaría aplicar estas sugerencias?</em></p>`,
+                    suggestion: 'Técnicas de Comunicación Efectiva para Equipos de Trabajo'
+                },
+                'objetivos': {
+                    title: 'Objetivo SMART Generado',
+                    content: `<h4>Objetivo General SMART:</h4>
+                    <div class="card" style="background: var(--color-bg-3); margin: var(--space-8) 0;">
+                        <div class="card__body">
+                            <p><strong>"Al finalizar el curso de 24 horas, los participantes serán capaces de aplicar 5 técnicas de comunicación efectiva en situaciones laborales reales, mejorando la colaboración en equipo en un 80% según evaluación práctica."</strong></p>
+                        </div>
+                    </div>
+                    
+                    <h4>Objetivos Específicos:</h4>
+                    <ul>
+                        <li>Identificar barreras de comunicación en equipos de trabajo</li>
+                        <li>Aplicar técnicas de escucha activa en conversaciones laborales</li>
+                        <li>Demostrar asertividad en situaciones de conflicto</li>
+                        <li>Facilitar reuniones efectivas usando herramientas de comunicación</li>
+                    </ul>`,
+                    suggestion: 'Al finalizar el curso de 24 horas, los participantes serán capaces de aplicar 5 técnicas de comunicación efectiva en situaciones laborales reales, mejorando la colaboración en equipo en un 80% según evaluación práctica.'
+                },
+                'contenido': {
+                    title: 'Estructura de Contenido Sugerida',
+                    content: `<h4>Contenido Temático Propuesto:</h4>
+                    <div style="font-family: monospace; background: var(--color-surface); padding: var(--space-12); border-radius: var(--radius-base);">
+MÓDULO I: FUNDAMENTOS DE LA COMUNICACIÓN (8 hrs)\n1.1 Conceptos básicos de comunicación\n1.2 Barreras de la comunicación\n1.3 Tipos de comunicación organizacional\n\nMÓDULO II: TÉCNICAS DE COMUNICACIÓN EFECTIVA (8 hrs)\n2.1 Escucha activa\n2.2 Comunicación asertiva\n2.3 Comunicación no verbal\n\nMÓDULO III: APLICACIÓN PRÁCTICA (8 hrs)\n3.1 Manejo de conflictos\n3.2 Reuniones efectivas\n3.3 Presentaciones impactantes
+                    </div>`,
+                    suggestion: `MÓDULO I: FUNDAMENTOS DE LA COMUNICACIÓN (8 hrs)\n1.1 Conceptos básicos de comunicación\n1.2 Barreras de la comunicación\n1.3 Tipos de comunicación organizacional\n\nMÓDULO II: TÉCNICAS DE COMUNICACIÓN EFECTIVA (8 hrs)\n2.1 Escucha activa\n2.2 Comunicación asertiva\n2.3 Comunicación no verbal\n\nMÓDULO III: APLICACIÓN PRÁCTICA (8 hrs)\n3.1 Manejo de conflictos\n3.2 Reuniones efectivas\n3.3 Presentaciones impactantes`
+                },
+                'conocimientos': {
+                    title: 'Reactivos de Evaluación Generados',
+                    content: `<h4>Preguntas de Opción Múltiple:</h4>
+                    <div style="font-family: monospace; background: var(--color-surface); padding: var(--space-12); border-radius: var(--radius-base);">
+1. ¿Cuál es el elemento más importante de la escucha activa?\na) Mantener contacto visual\nb) Parafrasear lo que dice el otro\nc) Evitar interrupciones\nd) Todas las anteriores\n\n2. La comunicación asertiva se caracteriza por:\na) Imponer nuestro punto de vista\nb) Evitar conflictos a toda costa\nc) Expresar ideas respetando a otros\nd) Hablar en voz alta\n\n3. ¿Qué porcentaje representa la comunicación no verbal?\na) 35%\nb) 55%\nc) 65%\nd) 75%
+                    </div>
+                    
+                    <h4>Clave de Respuestas:</h4>
+                    <p>1. d) | 2. c) | 3. b)</p>`,
+                    suggestion: `1. ¿Cuál es el elemento más importante de la escucha activa?\na) Mantener contacto visual\nb) Parafrasear lo que dice el otro\nc) Evitar interrupciones\nd) Todas las anteriores\n\n2. La comunicación asertiva se caracteriza por:\na) Imponer nuestro punto de vista\nb) Evitar conflictos a toda costa\nc) Expresar ideas respetando a otros\nd) Hablar en voz alta\n\n3. ¿Qué porcentaje representa la comunicación no verbal?\na) 35%\nb) 55%\nc) 65%\nd) 75%`
+                }
+            };
+            
+            const response = responses[context] || {
+                title: 'Sugerencia Generada',
+                content: '<p>Aquí tienes una sugerencia personalizada basada en las mejores prácticas del EC0301.</p>',
+                suggestion: 'Contenido sugerido...'
+            };
+            
+            document.getElementById('ai-content').innerHTML = `
+                <h3>${response.title}</h3>
+                ${response.content}
+            `;
+            
+            currentAISuggestion = response.suggestion;
+            document.getElementById('apply-ai-btn').style.display = 'inline-flex';
+        }
+        
+        function applyAISuggestion() {
+            const fieldMappings = {
+                'info-general': 'courseName',
+                'objetivos': 'generalObjective',
+                'contenido': 'thematicContent',
+                'conocimientos': 'knowledgeQuestions'
+            };
+            
+            const fieldId = fieldMappings[currentAIContext];
+            if (fieldId) {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.value = currentAISuggestion;
+                    closeAIModal();
+                    alert('✅ Sugerencia aplicada exitosamente');
+                }
+            }
+        }
+        
+        function closeAIModal() {
+            document.getElementById('ai-modal').style.display = 'none';
+            document.getElementById('apply-ai-btn').style.display = 'none';
+            document.getElementById('ai-content').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span>Generando sugerencias...</span>
+                </div>
+            `;
+        }
+        
+        function runAudit() {
+            showView('audit-view');
+            
+            // Simulate audit process
+            setTimeout(() => {
+                generateAuditReport();
+            }, 3000);
+        }
+        
+        function generateAuditReport() {
+            document.getElementById('audit-results').style.display = 'none';
+            document.getElementById('audit-report').style.display = 'block';
+            
+            // Generate completeness report
+            const completenessHTML = `
+                <div class="audit-item">
+                    <div class="audit-icon success">✓</div>
+                    <div>
+                        <strong>Carta descriptiva completa al 100%</strong><br>
+                        <small>Todos los campos obligatorios están llenos</small>
+                    </div>
+                </div>
+                <div class="audit-item">
+                    <div class="audit-icon success">✓</div>
+                    <div>
+                        <strong>Instrumentos de evaluación completos</strong><br>
+                        <small>Los 3 instrumentos están correctamente estructurados</small>
+                    </div>
+                </div>
+                <div class="audit-item">
+                    <div class="audit-icon warning">⚠</div>
+                    <div>
+                        <strong>Manual del instructor: 90% completo</strong><br>
+                        <small>Faltan algunos recursos adicionales</small>
+                    </div>
+                </div>
+            `;
+            
+            const qualityHTML = `
+                <div class="audit-item">
+                    <div class="audit-icon success">✓</div>
+                    <div>
+                        <strong>Objetivos cumplen metodología SMART</strong><br>
+                        <small>Objetivos específicos, medibles y temporales</small>
+                    </div>
+                </div>
+                <div class="audit-item">
+                    <div class="audit-icon success">✓</div>
+                    <div>
+                        <strong>Coherencia entre elementos verificada</strong><br>
+                        <small>Los 3 elementos son consistentes entre sí</small>
+                    </div>
+                </div>
+                <div class="audit-item">
+                    <div class="audit-icon warning">⚠</div>
+                    <div>
+                        <strong>2 errores ortográficos detectados</strong><br>
+                        <small>Revisar módulo 2 del contenido temático</small>
+                    </div>
+                </div>
+            `;
+            
+            const recommendationsHTML = `
+                <ul style="margin: 0; padding-left: var(--space-20);">
+                    <li style="margin-bottom: var(--space-8);">Añadir más técnicas de instrucción variadas para enriquecer el aprendizaje</li>
+                    <li style="margin-bottom: var(--space-8);">Especificar tiempos exactos para cada actividad de enseñanza-aprendizaje</li>
+                    <li style="margin-bottom: var(--space-8);">Incluir referencias bibliográficas más actuales (últimos 5 años)</li>
+                    <li style="margin-bottom: var(--space-8);">Completar la sección de recursos adicionales en el manual del instructor</li>
+                </ul>
+            `;
+            
+            document.getElementById('completeness-report').innerHTML = completenessHTML;
+            document.getElementById('quality-report').innerHTML = qualityHTML;
+            document.getElementById('recommendations-report').innerHTML = recommendationsHTML;
+        }
+        
+        function generateFinalPDF() {
+            alert('🎉 ¡Felicidades!\n\nTu portafolio de evidencias EC0301 está listo.\n\nEn una implementación real, aquí se generaría un PDF completo con todos los elementos desarrollados.\n\nContenido generado:\n• Carta Descriptiva\n• Instrumentos de Evaluación\n• Manuales del Curso\n\n✅ Cumple con todos los criterios del EC0301');
+        }
+        
+        function setupAutoSave() {
+            // Auto-save for all form inputs
+            const forms = ['carta-descriptiva-form'];
+            
+            forms.forEach(formId => {
+                const form = document.getElementById(formId);
+                if (form) {
+                    const inputs = form.querySelectorAll('input, textarea, select');
+                    inputs.forEach(input => {
+                        input.addEventListener('input', () => {
+                            // Auto-save functionality would go here
+                            // For now, we'll just update the data object
+                            if (formId === 'carta-descriptiva-form') {
+                                const formData = new FormData(form);
+                                for (let [key, value] of formData.entries()) {
+                                    if (!appData.elements.element1.data) {
+                                        appData.elements.element1.data = {};
+                                    }
+                                    appData.elements.element1.data[key] = value;
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        }
+        
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
